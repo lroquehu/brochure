@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Taller Flutter | Brochure Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=KaTeX_Main:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #020617; /* Slate 950 */
+            color: #e2e8f0;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .font-math { font-family: 'KaTeX_Main', serif; }
+        
+        /* Patrón de fondo Tech (Grid) */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
+                              linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, black, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 5%, black 40%, black 70%, transparent 95%);
+        }
+
+        /* Glassmorphism mejorado */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tabla Estilizada */
+        .tech-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+        .tech-table th {
+            text-align: left;
+            padding: 12px;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-bottom: 1px solid #334155;
+        }
+        .tech-table td {
+            padding: 16px;
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+        .tech-table tr:hover td {
+            background: rgba(30, 41, 59, 0.6);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        .tech-table td:first-child { border-radius: 8px 0 0 8px; border-right: none; font-weight: 600; color: #38bdf8; }
+        .tech-table td:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+
+        /* Math Fraction */
+        .fraction { display: inline-block; text-align: center; vertical-align: middle; margin: 0 0.2em; }
+        .fraction > span { display: block; padding: 0.1em; }
+        .fraction span.numerator { border-bottom: 2px solid #94a3b8; }
+        .fraction span.denominator { border-top: 0px; }
+
+        /* Page Layout */
+        .page-section {
+            position: relative;
+            min-height: 1000px; /* Altura extendida para contenido */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 10px;
+            color: #64748b;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-top: 1px solid #334155;
+            padding-top: 8px;
+        }
+
+        .page-break {
+            border-top: 1px dashed #334155;
+            margin: 0;
+            position: relative;
+            background: #020617;
+        }
+        .page-break::after {
+            content: '✂';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #020617;
+            padding: 0 10px;
+            color: #475569;
+        }
+
+        /* Orbes decorativos */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* Print Settings */
+        @media print {
+            body { background-color: white; -webkit-print-color-adjust: exact; }
+            .no-print { display: none; }
+            .bg-slate-900, .bg-slate-950, .glass-card, .tech-table td { background-color: white !important; color: black !important; border: 1px solid #ddd !important; backdrop-filter: none; }
+            .text-white { color: black !important; }
+            .text-slate-300, .text-slate-400 { color: #333 !important; }
+            .bg-grid-pattern, .glow-orb { display: none; }
+            .page-break { break-after: page; border: none; }
+            .page-break::after { display: none; }
+            .page-number { color: #000 !important; border-color: #000 !important; }
+            .tech-table td { background: white !important; color: black !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start p-0 md:p-8">
+
+    <!-- Main Brochure Container -->
+    <div class="max-w-4xl w-full bg-[#020617] shadow-2xl overflow-hidden border border-slate-800 rounded-none md:rounded-2xl relative z-10">
+        
+        <!-- Top Bar Gradient -->
+        <div class="h-3 w-full bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-800 relative z-50"></div>
+
+        <!-- ================= HOJA 01: PORTADA ================= -->
+        <div class="page-section bg-[#020617]">
+            <div class="absolute inset-0 bg-grid-pattern opacity-20 z-0"></div>
+            <div class="glow-orb w-96 h-96 bg-blue-600 top-[-100px] left-[-100px]"></div>
+
+            <!-- Header Logos -->
+            <div class="bg-white/95 backdrop-blur-md px-8 py-4 border-b border-slate-200 relative z-30">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="flex items-center gap-6">
+                        <div class="flex flex-col items-center"><img src="image_unjbg.png" alt="UNJBG" class="h-14 w-auto object-contain"></div>
+                        <div class="h-8 w-px bg-slate-300"></div>
+                        <div class="flex flex-col items-center"><img src="image_esis.png" alt="ESIS" class="h-14 w-auto object-contain"></div>
+                        <div class="h-8 w-px bg-slate-300"></div>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <p class="text-[10px] text-slate-500 uppercase tracking-[0.2em] font-bold mb-1">Organiza</p>
+                        <h3 class="text-xs md:text-sm font-extrabold text-slate-800 leading-tight">CÍRCULO DE ESTUDIOS<br>DE LA ESIS</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative px-8 pt-12 pb-8 flex-grow flex flex-col items-center text-center z-10">
+                <div class="flex gap-3 mb-8">
+                    <span class="px-4 py-1.5 text-[10px] font-bold text-blue-200 bg-blue-900/30 border border-blue-500/30 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(59,130,246,0.3)]">Curso Taller</span>
+                    <span class="px-4 py-1.5 text-[10px] font-bold text-green-300 bg-green-900/30 border border-green-500/30 rounded-full uppercase tracking-widest shadow-[0_0_15px_rgba(74,222,128,0.2)]">Presencial</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-6 text-white drop-shadow-lg">
+                    DESARROLLO DE<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-300">APPS MÓVILES</span>
+                </h1>
+
+                <div class="glass-card flex items-center justify-center gap-6 mb-10 px-8 py-3 rounded-full">
+                    <div class="flex items-center gap-2"><img src="https://storage.googleapis.com/cms-storage-bucket/0dbfcc7a59cd1cf16282.png" alt="Flutter" class="h-6"><span class="font-bold text-lg tracking-tight text-white">Flutter</span></div>
+                    <span class="text-xl text-slate-600 font-thin">|</span>
+                    <div class="flex items-center gap-2"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png" alt="Dart" class="h-6"><span class="font-bold text-lg tracking-tight text-white">Dart</span></div>
+                </div>
+
+                 <!-- DEVICE FRAME (CSS Mockup) -->
+                <div class="relative mx-auto border-gray-800 bg-gray-800 border-[8px] rounded-[2.5rem] h-[300px] w-[180px] md:h-[350px] md:w-[200px] shadow-2xl flex flex-col mb-8 transform hover:scale-105 transition duration-500">
+                    <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[10px] top-[72px] rounded-l-lg"></div>
+                    <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[10px] top-[124px] rounded-l-lg"></div>
+                    <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[10px] top-[142px] rounded-r-lg"></div>
+                    <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white relative">
+                        <!-- Imagen dentro del celular -->
+                        <img src="pantalla_inicio.jpg" class="w-full h-full object-cover" alt="App Screen">
+                        <div class="absolute bottom-0 w-full h-24 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-4">
+                            <p class="text-white text-xs font-mono">Running on Android & iOS</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Info Cards con Glassmorphism -->
+                <div class="grid grid-cols-3 gap-4 w-full max-w-3xl">
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center border-blue-400 transition-colors">
+                        <i class="far fa-calendar-alt text-2xl text-blue-400 mb-2 drop-shadow-lg"></i>
+                        <p class="text-[9px] text-slate-400 uppercase font-bold tracking-widest">Inicio</p>
+                        <p class="text-white font-bold text-lg">3 Febrero</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center border-purple-400 transition-colors">
+                        <i class="far fa-clock text-2xl text-purple-400 mb-2 drop-shadow-lg"></i>
+                        <p class="text-[9px] text-slate-400 uppercase font-bold tracking-widest">Horario</p>
+                        <p class="text-white font-bold text-xs">Martes - Jueves - Viernes<br>11:20am - 1:00pm</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl flex flex-col items-center text-center border-green-400 transition-colors">
+                        <i class="fas fa-tag text-2xl text-green-400 mb-2 drop-shadow-lg"></i>
+                        <p class="text-[9px] text-slate-400 uppercase font-bold tracking-widest">Costo</p>
+                        <p class="text-white font-bold text-lg">S/. 85</p>
+                    </div>
+                </div>
+            </div>
+            <div class="page-number">01</div>
+        </div>
+
+        <div class="page-break w-full"></div>
+
+        <!-- ================= HOJA 02: DESCRIPCIÓN & INFO GENERAL ================= -->
+        <div class="page-section bg-[#020617] px-8 md:px-12 py-12">
+            <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+            <div class="glow-orb w-64 h-64 bg-cyan-900/30 bottom-10 right-10"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+                <!-- Título Sección -->
+                <div class="flex items-center mb-8 border-b border-slate-800 pb-4">
+                    <div class="w-10 h-10 bg-blue-900/50 rounded-lg flex items-center justify-center mr-4 border border-blue-500/30">
+                        <i class="fas fa-info-circle text-blue-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Acerca del Curso</h3>
+                </div>
+
+                <!-- Descripción -->
+                <div class="mb-10">
+                    <h4 class="text-blue-400 font-bold uppercase text-xs tracking-widest mb-4">01. Descripción</h4>
+                    <div class="glass-card p-6 rounded-xl border-l-4 border-l-blue-500">
+                        <p class="text-slate-300 leading-relaxed text-sm text-justify">
+                            En la actualidad, el desarrollo móvil requiere velocidad y eficiencia. Este curso teórico-práctico está diseñado para sumergir al estudiante en <b>Flutter</b>, el framework de Google que ha revolucionado la industria. A través del lenguaje <b>Dart</b>, los participantes aprenderán a construir aplicaciones visualmente impactantes, con rendimiento nativo y desde una única base de código, reduciendo los tiempos de desarrollo a la mitad.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tabla de Info General -->
+                <div class="flex-grow">
+                    <h4 class="text-green-400 font-bold uppercase text-xs tracking-widest mb-4">02. Información General</h4>
+                    
+                    <div class="overflow-hidden rounded-xl border border-slate-800 shadow-2xl">
+                        <table class="tech-table">
+                            <tbody>
+                                <tr>
+                                    <td class="w-1/3"><i class="far fa-calendar-check mr-2"></i> Inicio</td>
+                                    <td class="text-white font-semibold">3 de Febrero</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-hourglass-half mr-2"></i> Duración</td>
+                                    <td class="text-white">40 Horas Académicas</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="far fa-clock mr-2"></i> Horario</td>
+                                    <td class="text-white">Martes, Miércoles y Jueves <br><span class="text-xs text-slate-400">(11:20 am - 1:00 pm)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-chalkboard-teacher mr-2"></i> Modalidad</td>
+                                    <td><span class="bg-green-900/40 text-green-400 px-2 py-1 rounded text-xs border border-green-500/30">100% Presencial</span></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-map-marker-alt mr-2"></i> Lugar</td>
+                                    <td class="text-white">Laboratorio A, 3er Piso <br><span class="text-xs text-slate-400">Pabellón Ing. Metalúrgica</span></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-tag mr-2"></i> Inversión</td>
+                                    <td><span class="text-xl font-bold text-white">S/. 85.00</span> <span class="text-xs text-slate-400 ml-2">(Pago Único)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="page-number">02</div>
+        </div>
+
+        <div class="page-break w-full"></div>
+
+        <!-- ================= HOJA 03: OBJETIVOS & DIRIGIDO A ================= -->
+        <div class="page-section bg-[#020617] px-8 md:px-12 py-12">
+            <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+            <div class="glow-orb w-64 h-64 bg-purple-900/30 top-10 right-0"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+                <!-- Título Sección -->
+                <div class="flex items-center mb-8 border-b border-slate-800 pb-4">
+                    <div class="w-10 h-10 bg-purple-900/50 rounded-lg flex items-center justify-center mr-4 border border-purple-500/30">
+                        <i class="fas fa-bullseye text-purple-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Metas del Aprendizaje</h3>
+                </div>
+
+                <!-- Dirigido A -->
+                <div class="mb-10">
+                    <h4 class="text-purple-400 font-bold uppercase text-xs tracking-widest mb-4">03. Perfil del Estudiante</h4>
+                    <div class="glass-card p-6 rounded-xl flex items-start gap-4">
+                        <div class="bg-slate-800 p-3 rounded-full shrink-0 border border-slate-700">
+                            <i class="fas fa-user-graduate text-slate-300"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-bold text-sm mb-2">¿A quién va dirigido?</h5>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Dirigido a estudiantes de ingeniería, desarrolladores web, entusiastas de la tecnología y cualquier persona con conocimientos básicos de lógica de programación que desee especializarse en la creación de apps móviles modernas y escalables.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Objetivos -->
+                <div class="flex-grow">
+                    <h4 class="text-cyan-400 font-bold uppercase text-xs tracking-widest mb-4">04. Objetivos del Curso</h4>
+                    <div class="grid gap-3">
+                        <!-- Objetivo Item -->
+                        <div class="glass-card p-4 rounded-lg flex items-start gap-3 hover:bg-slate-800/60 transition">
+                            <i class="fas fa-check-circle text-cyan-500 mt-1 shrink-0"></i>
+                            <p class="text-sm text-slate-300">Configurar y gestionar el entorno de desarrollo profesional (Android Studio/VS Code).</p>
+                        </div>
+                        <!-- Objetivo Item -->
+                        <div class="glass-card p-4 rounded-lg flex items-start gap-3 hover:bg-slate-800/60 transition">
+                            <i class="fas fa-check-circle text-cyan-500 mt-1 shrink-0"></i>
+                            <p class="text-sm text-slate-300">Dominar la sintaxis y características modernas del lenguaje Dart.</p>
+                        </div>
+                        <!-- Objetivo Item -->
+                        <div class="glass-card p-4 rounded-lg flex items-start gap-3 hover:bg-slate-800/60 transition">
+                            <i class="fas fa-check-circle text-cyan-500 mt-1 shrink-0"></i>
+                            <p class="text-sm text-slate-300">Diseñar interfaces de usuario complejas y responsivas utilizando Widgets.</p>
+                        </div>
+                         <!-- Objetivo Item -->
+                         <div class="glass-card p-4 rounded-lg flex items-start gap-3 hover:bg-slate-800/60 transition">
+                            <i class="fas fa-check-circle text-cyan-500 mt-1 shrink-0"></i>
+                            <p class="text-sm text-slate-300">Gestionar el flujo de información y el estado de la aplicación (State Management).</p>
+                        </div>
+                         <!-- Objetivo Item -->
+                         <div class="glass-card p-4 rounded-lg flex items-start gap-3 hover:bg-slate-800/60 transition">
+                            <i class="fas fa-check-circle text-cyan-500 mt-1 shrink-0"></i>
+                            <p class="text-sm text-slate-300">Conectar la aplicación con fuentes de datos externas (APIs) y almacenamiento local.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-number">03</div>
+        </div>
+
+        <div class="page-break w-full"></div>
+
+        <!-- ================= HOJA 04: TEMARIO ================= -->
+        <div class="page-section bg-[#020617] px-8 md:px-12 py-12">
+            <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <div class="flex items-center mb-10 border-b border-slate-800 pb-6">
+                    <div class="w-10 h-10 bg-blue-900/50 rounded-lg flex items-center justify-center mr-4 border border-blue-500/30">
+                        <i class="fas fa-layer-group text-blue-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">Temario del Curso</h3>
+                        <p class="text-blue-400 text-sm font-mono mt-1">// Aprender Haciendo</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6 relative ml-4">
+                    <div class="absolute left-[19px] top-6 bottom-6 w-0.5 bg-slate-800 shadow-[0_0_10px_rgba(148,163,184,0.1)]"></div>
+
+                    <!-- Módulo 1 -->
+                    <div class="relative pl-16 group">
+                        <div class="absolute left-0 top-1 w-10 h-10 bg-[#0f172a] border border-slate-700 rounded-full flex items-center justify-center font-bold text-slate-500 z-10 shadow-lg">1</div>
+                        <div class="glass-card p-6 rounded-2xl hover:bg-slate-800/60 transition-all">
+                            <h4 class="text-lg font-bold text-blue-400 mb-2">Semana 01: Fundamentos y Entorno</h4>
+                            <ul class="text-sm text-slate-300 space-y-2">
+                                <li><span class="text-blue-500 mr-2">›</span> Introducción al ecosistema móvil. ¿Por qué Flutter?</li>
+                                <li><span class="text-blue-500 mr-2">›</span>Instalación y configuración del entorno (SDK, Android Studio).</li>
+                                <li><span class="text-blue-500 mr-2">›</span> <b>Taller de Dart:</b> Variables, funciones, listas y programación asíncrona.
+                                </li>
+                                <li><span class="text-blue-500 mr-2">›</span>Anatomía de un proyecto Flutter.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Módulo 2 -->
+                    <div class="relative pl-16 group">
+                        <div class="absolute left-0 top-1 w-10 h-10 bg-[#0f172a] border border-slate-700 rounded-full flex items-center justify-center font-bold text-slate-500 z-10 shadow-lg">2</div>
+                        <div class="glass-card p-6 rounded-2xl hover:bg-slate-800/60 transition-all">
+                            <h4 class="text-lg font-bold text-cyan-400 mb-2">Semana 02: Diseño de Interfaces (UI)</h4>
+                            <ul class="text-sm text-slate-300 space-y-2">
+                                <li><span class="text-cyan-500 mr-2">›</span> Widgets Stateless vs. Stateful: ¿Cuándo usar cuál?</li>
+                                <li><span class="text-cyan-500 mr-2">›</span> El árbol de Widgets.</li>
+                                <li><span class="text-cyan-500 mr-2">›</span> Diseño visual: Container, Column, Row, Stack.</li>
+                                <li><span class="text-cyan-500 mr-2">›</span><b>Práctica:</b> Clonando una interfaz famosa (tipo Instagram/WhatsApp).</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <!-- Módulo 3 -->
+                     <div class="relative pl-16 group">
+                        <div class="absolute left-0 top-1 w-10 h-10 bg-[#0f172a] border border-slate-700 rounded-full flex items-center justify-center font-bold text-slate-500 z-10 shadow-lg">3</div>
+                        <div class="glass-card p-6 rounded-2xl hover:bg-slate-800/60 transition-all">
+                            <h4 class="text-lg font-bold text-purple-400 mb-2">Semana 03: Navegación y Estructura</h4>
+                            <ul class="text-sm text-slate-300 space-y-2">
+                                <li><span class="text-purple-500 mr-2">›</span> Navegación entre pantallas (Push, Pop, Named Routes).</li>
+                                <li><span class="text-purple-500 mr-2">›</span> Uso de Menús laterales (Drawers) y Barras de navegación (BottomNavigationBar).</li>
+                                <li><span class="text-purple-500 mr-2">›</span> Organización de carpetas y buenas prácticas de "Clean Code".</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <!-- Módulo 4 -->
+                     <div class="relative pl-16 group">
+                        <div class="absolute left-0 top-1 w-10 h-10 bg-[#0f172a] border border-slate-700 rounded-full flex items-center justify-center font-bold text-slate-500 z-10 shadow-lg">4</div>
+                        <div class="glass-card p-6 rounded-2xl hover:bg-slate-800/60 transition-all">
+                            <h4 class="text-lg font-bold text-green-400 mb-2">Semana 04: Lógica y Datos</h4>
+                            <ul class="text-sm text-slate-300 space-y-2">
+                                <li><span class="text-green-500 mr-2">›</span> Gestión de Estado: Introducción a <b>Provider</b>.</li>
+                                <li><span class="text-green-500 mr-2">›</span> Formularios y validación de inputs del usuario.</li>
+                                <li><span class="text-green-500 mr-2">›</span> Consumo de APIs REST (HTTP Requests).</li>
+                                <li><span class="text-green-500 mr-2">›</span> Persistencia de datos local con SQLite/Shared Preferences.</li>
+                                <li><span class="text-green-500 mr-2">›</span> Presentación de proyecto final</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-number">04</div>
+        </div>
+
+        <div class="page-break w-full"></div>
+
+        <!-- ================= HOJA 05: EVALUACIÓN ================= -->
+        <div class="page-section bg-[#020617] px-8 md:px-12 py-12">
+            
+            <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+            
+            <div class="relative z-10 flex flex-col h-full justify-center">
+                <div class="flex items-center mb-10 border-b border-slate-800 pb-6">
+                    <div class="w-10 h-10 bg-green-900/50 rounded-lg flex items-center justify-center mr-4 border border-green-500/30">
+                        <i class="fas fa-calculator text-green-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">Evaluación</h3>
+                        <p class="text-green-400 text-sm font-mono mt-1">// Ecuación de Nota Final</p>
+                    </div>
+                </div>
+
+                <!-- Text Description Block -->
+                <div class="mb-6 space-y-4 text-slate-300 text-sm leading-relaxed">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-green-500 mt-1 shrink-0"></i>
+                        <p>En cada semana se realizará una evaluación la cual estará sujeta a una calificación.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-green-500 mt-1 shrink-0"></i>
+                        <div>
+                            <p class="mb-2">La nota del curso se obtendrá de la siguiente manera:</p>
+                            <p class="text-xs text-slate-400 italic">"Si el curso cuenta con cuatro prácticas calificadas, se deberá eliminar la menor de estas notas. Las más altas se sumarán al doble de la evaluación final según la siguiente fórmula:"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-10 rounded-3xl text-center relative overflow-hidden group mb-8">
+                    <div class="font-math text-2xl md:text-3xl text-white py-6 bg-black/20 rounded-xl inline-block px-10 border border-slate-700/50 shadow-inner">
+                        NF = 
+                        <div class="fraction">
+                            <span class="numerator">
+                                &Sigma;(P<small>1</small> + P<small>2</small> + P<small>3</small> + P<small>4</small>) - Min(P) + 2(Ex)
+                            </span>
+                            <span class="denominator">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-10 rounded-3xl text-center relative overflow-hidden group mb-8">
+                    <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider text-slate-400">Glosario</h4>
+                    <div class="grid gap-4">
+                        <div class="flex items-center gap-4 p-3 rounded-lg border border-slate-700">
+                            <div class="bg-cyan-500/10 text-cyan-400 font-mono font-bold px-3 py-1 rounded">P1..P4</div>
+                            <div class="text-sm text-slate-300">Prácticas Semanales.</div>
+                        </div>
+                        <div class="flex items-center gap-4 p-3 rounded-lg border border-slate-700">
+                            <div class="bg-red-500/10 text-red-400 font-mono font-bold px-3 py-1 rounded">Min</div>
+                            <div class="text-sm text-slate-300">Eliminación de nota más baja.</div>
+                        </div>
+                        <div class="flex items-center gap-4 p-3 rounded-lg border border-slate-700">
+                            <div class="bg-yellow-500/10 text-yellow-400 font-mono font-bold px-3 py-1 rounded">Ex</div>
+                            <div class="text-sm text-slate-300">Proyecto Final (App Funcional).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rules & Glossary Grid -->
+                <div class="glass-card p-10 rounded-3xl text-center relative overflow-hidden group mb-8">
+                    <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider text-slate-400">Reglas</h4>
+                    <div class="grid gap-3">
+                        <!-- Rule 1 -->
+                        <div class="flex items-start gap-3 p-2 rounded-lg border border-transparent hover:bg-slate-800/50">
+                            <i class="fas fa-user-clock text-blue-400 mt-1"></i>
+                            <div class="text-sm text-slate-300">La asistencia de cada sesión se tomará en cualquier momento durante el horario de clase.</div>
+                        </div>
+                         <!-- Rule 2 & 3 Combined row -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="flex items-center gap-3 p-2 rounded-lg border border-transparent hover:bg-slate-800/50">
+                                <i class="fas fa-clipboard-check text-green-400"></i>
+                                <div class="text-sm text-slate-300">Nota Aprobatoria <span class="text-green-400 font-bold">>= 12</span></div>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 rounded-lg border border-transparent hover:bg-slate-800/50">
+                                <i class="fas fa-percentage text-purple-400"></i>
+                                <div class="text-sm text-slate-300">Min. asistencia: <span class="text-purple-400 font-bold">75%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <div class="page-number">05</div>
+        </div>
+
+        <div class="page-break w-full"></div>
+
+        <!-- ================= HOJA 06: DOCENTE ================= -->
+        <div class="page-section bg-[#020617] px-8 md:px-12 py-12">
+            <!-- Grid & Glow -->
+            <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+            <div class="glow-orb w-[500px] h-[500px] bg-purple-900/20 top-[-200px] right-[-200px]"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+                
+                <!-- Título -->
+                <div class="flex items-center mb-10 border-b border-slate-800 pb-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl flex items-center justify-center mr-5 shadow-[0_0_20px_rgba(147,51,234,0.4)]">
+                        <i class="fas fa-user-astronaut text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-white">Docente</h3>
+                        <p class="text-purple-400 text-sm font-mono mt-1">// Android Developer</p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Docente -->
+                <div class="glass-card p-8 rounded-3xl flex flex-col items-center text-center relative overflow-hidden mb-12">
+                    <div class="w-32 h-32 rounded-full border-4 border-slate-800 p-1 bg-gradient-to-br from-blue-500 to-cyan-500 mb-6 shadow-2xl">
+                        <img src="copia.jpg" alt="Docente" class="w-full h-full rounded-full object-cover">
+                    </div>
+                    <h4 class="text-2xl font-bold text-white">Luis Miguel Roque Huacca</h4>
+                    <p class="text-slate-400 text-xs uppercase tracking-widest mb-4">Ing. en Informática y Sistemas</p>
+                    
+                    <div class="flex gap-2 mb-6">
+                        <span class="px-3 py-1 bg-slate-800 rounded text-[10px] text-cyan-400 font-mono border border-slate-700">Flutter</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded text-[10px] text-blue-400 font-mono border border-slate-700">Kotlin</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded text-[10px] text-green-400 font-mono border border-slate-700">Clean Arch</span>
+                    </div>
+                    
+                    <p class="text-slate-300 text-sm max-w-lg font-light">
+                        "Mi objetivo no es solo que escribas código, sino que entiendas la arquitectura detrás de aplicaciones escalables. Aprenderemos con estándares de la industria."
+                    </p>
+                </div>
+
+                <!-- SECCIÓN CALL TO ACTION & QR -->
+                <div class="mt-auto pt-8 border-t border-slate-800">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                        
+                        <!-- Lado Izquierdo: Texto CTA -->
+                        <div class="text-center md:text-left flex-1">
+                            <h5 class="text-xl font-bold text-white mb-4">Mis Redes Sociales</h5>
+                            
+                            <!-- Redes Sociales Grid -->
+                            <div class="flex flex-col gap-3 mb-6">
+                                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition">
+                                    <div class="w-8 h-8 rounded bg-blue-600 flex items-center justify-center text-white"><i class="fab fa-facebook-f"></i></div>
+                                    <span class="text-sm text-slate-300">Luis Roque</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition">
+                                    <div class="w-8 h-8 rounded bg-pink-600 flex items-center justify-center text-white"><i class="fab fa-instagram"></i></div>
+                                    <span class="text-sm text-slate-300">@lvis.roque</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition">
+                                    <div class="w-8 h-8 rounded bg-blue-700 flex items-center justify-center text-white"><i class="fab fa-linkedin-in"></i></div>
+                                    <span class="text-sm text-slate-300">Luis Roque</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lado Derecho: QR Code Ficticio -->
+                        <div class="glass-card p-4 rounded-2xl flex flex-col items-center bg-white/5">
+                            <div class="bg-white p-2 rounded-lg mb-2">
+                                <!-- Placeholder QR con FontAwesome o imagen -->
+                                <img src="wsp qr.jpg" alt="QR Inscripción" class="w-24 h-24">
+                            </div>
+                            <p class="text-[10px] text-cyan-400 font-mono uppercase tracking-widest">Grupo de Whatsapp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-number">04</div>
+        </div>
+
+    </div>
+</body>
+</html>
